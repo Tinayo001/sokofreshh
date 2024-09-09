@@ -1,4 +1,5 @@
 {
+  {
   "version": 2,
   "builds": [
     {
@@ -6,18 +7,18 @@
       "use": "@vercel/python"
     },
     {
-      "src": "frontend/*",
+      "src": "frontend/templates/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/app/(.*)",
+      "src": "/api/(.*)",
       "dest": "run.py"
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/index.html"
+      "dest": "/frontend/templates/index.html"
     }
   ]
 }
