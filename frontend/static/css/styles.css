@@ -9,7 +9,6 @@ body {
 }
 
 header {
-    background-image: url('../images/logo.png');
     text-align: center;
     display: flex;
     justify-content: center;
@@ -25,9 +24,6 @@ header {
 }
 
 .banner {
-    display: block;
-    width: 100%;
-    height: auto;
     text-align: center;
     position: relative;
     color: white;
