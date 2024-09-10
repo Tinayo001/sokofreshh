@@ -9,6 +9,7 @@ body {
 }
 
 header {
+    background-image: url(images/logo.png);
     text-align: center;
     display: flex;
     justify-content: center;
