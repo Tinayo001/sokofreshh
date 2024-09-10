@@ -25,6 +25,9 @@ header {
 }
 
 .banner {
+    display: block;
+    width: 100%;
+    height: auto;
     text-align: center;
     position: relative;
     color: white;
