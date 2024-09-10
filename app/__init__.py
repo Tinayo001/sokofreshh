@@ -14,6 +14,7 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 
 app = Flask(__name__, template_folder='frontend/templates')
+app = Flask(__name__, static_folder='frontend/static/images')
 
 from app.routes import init_routes
 init_routes(app)
