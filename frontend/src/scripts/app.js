@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const products = [
             { id: 1, name: 'Apple', category: 'Fruits' },
             { id: 2, name: 'Carrot', category: 'Vegetables' },
+            { id: 3, name: 'milk', category: 'Dairy'}
             // ... add more products
         ];
 
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateGrid() {
-        const filteredProducts = getFilteredProducts();
+        const filteredProducts = getFilteredProducts(Products);
         renderProducts(filteredProducts);
     }
 
@@ -49,22 +50,32 @@ document.addEventListener('DOMContentLoaded', () => {
             product.name.toLowerCase().includes(searchQuery)
         );
     }
+    function loadProducts() {
+        fetch(`${API_URL}/products`)
+          .then(response => response.json())
+          .then(products => {
+              totalPages = Math.ceil(products.length / itemsPerPage);
+              updateGrid(products);
+          })
+          .catch(error => console.error('Error fetching products:', error));
+    }
+    
 
     function renderProducts(products) {
         gridContainer.innerHTML = '';
-        products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-            .forEach(product => {
-                const item = document.createElement('div');
-                item.className = 'product-item';
-                item.innerHTML = `
-                    <img src="../static/images/${product.image}.jpg" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <p>Price: $${product.price.toFixed(2)}</p>
-                    <!-- Add more details as needed -->
-                `;
-                gridContainer.appendChild(item);
-            });
+        const paginatedProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+        paginatedProducts.forEach(product => {
+            const item = document.createElement('div');
+            item.className = 'product-item';
+            item.innerHTML = `
+                <img src="../static/images/${product.image}.jpg" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>Price: $${product.price.toFixed(2)}</p>
+        `   ;
+            gridContainer.appendChild(item);
+        });
     }
+    
 
     function handlePagination(e) {
         const target = e.target;

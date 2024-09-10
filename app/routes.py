@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from flask_cors import CORS
 from flask import Blueprint, request, jsonify, render_template
 from app.models import Farmer, Retailer, Product, Order, Transaction, db
 
@@ -99,4 +100,5 @@ def get_transactions():
 
 # Register the blueprint
 def init_routes(app):
+    CORS(app)
     app.register_blueprint(routes)

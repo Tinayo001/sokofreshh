@@ -1,117 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SokoFresh</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sokofreshh App</title>
+	<link rel="stylesheet" href="../static/css/styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+			text-align: center;
+		}
+		header {
+			background-color: #2c3e50;
+			color: white;
+			padding: 20px 0;
+		}
+		h1 {
+			margin: 0;
+			font-size: 2.5em;
+		}
+		p {
+			font-size: 1.2em;
+			color: #333;
+		}
+		.content {
+			padding: 20px;
+		}
+		.api-links a {
+			display: inline-block;
+			margin: 10px;
+			padding: 10px 20px;
+			background-color: #3498db;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+		}
+		.api-links a:hover {
+			background-color: #2980b9;
+		}
+		.grid-container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin-top: 20px;
+		}
+		.product-item {
+			background-color: white;
+			padding: 15px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			margin: 10px;
+			width: calc(33.333% - 20px);
+			max-width: 300px;
+		}
+		.product-item img {
+			width: 100%;
+			height: auto;
+			border-radius: 4px;
+		}
+		.product-item h3 {
+			margin-top: 0;
+		}
+		.filter-container {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		.filter-select, .filter-input {
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			margin-right: 10px;
+		}
+		.pagination {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+		}
+		.pagination button {
+			background-color: #3498db;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+		.pagination button:hover {
+			background-color: #2980b9;
+		}
+	</style>
 </head>
-  <body>
-    <h1>Welcome to SokoFresh</h1>
+<body>
+    <header>
+	<img src="../static/images/logo.png" alt="Sokofreshh App Logo" class="logo">
+	<h1>Welcome to Sokofreshh App</h1>
+    </header>
+    <div class="banner">
+	<img src="../static/images/banner.jpg" alt="Agricultural Banner" class="banner-image">
+    <div class="content">
+	<p>Your one-stop solution for managing agricultural products!</p>
+	<div class="api-links">
+	    <button id="/farmers">View Farmers</button>
+	    <button id="/retailers">View Retailers</button>
+	    <button id="/products">View Products</button>
+	    <button id="/orders">View Orders</button>
+	    <button id="/transactions">View Transactions</button>
+	</div>
 
-    <!-- Displaying data from API -->
-    {% if farmers %}
-        <h2>Farmers:</h2>
-        <ul>
-            {% for farmer in farmers %}
-                <li>{{ farmer.name }} (ID: {{ farmer.id }})</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+	<!-- Grid container -->
+	<div id="content" class="grid-container">
+		<!-- Product items will be dynamically added here -->
+	</div>
 
-    <!-- Form to add new farmer -->
-    <form id="add-farmer-form">
-        <input type="text" id="farmer-name" placeholder="Enter farmer name">
-        <button type="submit">Add Farmer</button>
-    </form>
+	<!-- Filtering controls -->
+	<div class="filter-container">
+		<select id="category-filter" class="filter-select">
+			<option value="">All Categories</option>
+			<option value="vegetables">Vegetables</option>
+			<option value="fruits">Fruits</option>
+			<!-- Add more options as needed -->
+		</select>
+		<input type="text" id="search-input" placeholder="Search products..." class="filter-input">
+	</div>
 
-    <!-- Displaying data from API -->
-    {% if retailers %}
-        <h2>Retailers:</h2>
-        <ul>
-            {% for retailer in retailers %}
-                <li>{{ retailer.name }} (ID: {{ retailer.id }})</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+	<!-- Pagination controls -->
+	<div class="pagination">
+		<button id="prev-page">&lt;</button>
+		<span id="current-page">1</span>/<span id="total-pages"></span>
+		<button id="next-page">&gt;</button>
+	</div>
 
-    <!-- Form to add new retailer -->
-    <form id="add-retailer-form">
-        <input type="text" id="retailer-name" placeholder="Enter retailer name">
-        <button type="submit">Add Retailer</button>
-    </form>
+	<footer>
+		<p>&copy; 2024 Sokofreshh App. All rights reserved.</p>
+	</footer>
 
-    <!-- Displaying data from API -->
-    {% if products %}
-        <h2>Products:</h2>
-        <ul>
-            {% for product in products %}
-                <li>{{ product.name }} (ID: {{ product.id }})</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <!-- Form to add new product -->
-    <form id="add-product-form">
-        <input type="text" id="product-name" placeholder="Enter product name">
-        <input type="number" id="product-price" placeholder="Enter product price">
-        <button type="submit">Add Product</button>
-    </form>
-
-    <!-- Displaying data from API -->
-    {% if orders %}
-        <h2>Orders:</h2>
-        <ul>
-            {% for order in orders %}
-                <li>Order ID: {{ order.id }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <!-- Form to create new order -->
-    <form id="create-order-form">
-        <select id="order-farmer" name="farmer_id">
-            <option value="">Select Farmer</option>
-            {% for farmer in farmers %}
-                <option value="{{ farmer.id }}">{{ farmer.name }}</option>
-            {% endfor %}
-        </select>
-        <select id="order-retailer" name="retailer_id">
-            <option value="">Select Retailer</option>
-            {% for retailer in retailers %}
-                <option value="{{ retailer.id }}">{{ retailer.name }}</option>
-            {% endfor %}
-        </select>
-        <input type="number" id="order-quantity" placeholder="Quantity">
-        <button type="submit">Create Order</button>
-    </form>
-
-    <!-- Displaying data from API -->
-    {% if transactions %}
-        <h2>Transactions:</h2>
-        <ul>
-            {% for transaction in transactions %}
-                <li>Amount: {{ transaction.amount }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <!-- Form to create new transaction -->
-    <form id="create-transaction-form">
-        <select id="transaction-farmer" name="farmer_id">
-            <option value="">Select Farmer</option>
-            {% for farmer in farmers %}
-                <option value="{{ farmer.id }}">{{ farmer.name }}</option>
-            {% endfor %}
-        </select>
-        <select id="transaction-retailer" name="retailer_id">
-            <option value="">Select Retailer</option>
-            {% for retailer in retailers %}
-                <option value="{{ retailer.id }}">{{ retailer.name }}</option>
-            {% endfor %}
-        </select>
-        <input type="number" id="transaction-amount" placeholder="Amount">
-        <button type="submit">Create Transaction</button>
-    </form>
+	<script src="../static/js/script.js"></script>
+  <script src="../static/Products.js"></script>
 </body>
 </html>
 
