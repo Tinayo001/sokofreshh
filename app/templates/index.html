@@ -1,146 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sokofreshh App</title>
-	<link rel="stylesheet" href="../static/css/styles.css">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background-color: #f4f4f4;
-			text-align: center;
-		}
-		header {
-			background-color: #2c3e50;
-			color: white;
-			padding: 20px 0;
-		}
-		h1 {
-			margin: 0;
-			font-size: 2.5em;
-		}
-		p {
-			font-size: 1.2em;
-			color: #333;
-		}
-		.content {
-			padding: 20px;
-		}
-		.api-links a {
-			display: inline-block;
-			margin: 10px;
-			padding: 10px 20px;
-			background-color: #3498db;
-			color: white;
-			text-decoration: none;
-			border-radius: 5px;
-		}
-		.api-links a:hover {
-			background-color: #2980b9;
-		}
-		.grid-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			margin-top: 20px;
-		}
-		.product-item {
-			background-color: white;
-			padding: 15px;
-			border-radius: 8px;
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-			margin: 10px;
-			width: calc(33.333% - 20px);
-			max-width: 300px;
-		}
-		.product-item img {
-			width: 100%;
-			height: auto;
-			border-radius: 4px;
-		}
-		.product-item h3 {
-			margin-top: 0;
-		}
-		.filter-container {
-			display: flex;
-			justify-content: center;
-			margin-bottom: 20px;
-		}
-		.filter-select, .filter-input {
-			padding: 10px;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			margin-right: 10px;
-		}
-		.pagination {
-			display: flex;
-			justify-content: center;
-			margin-top: 20px;
-		}
-		.pagination button {
-			background-color: #3498db;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 4px;
-			cursor: pointer;
-			transition: background-color 0.3s ease;
-		}
-		.pagination button:hover {
-			background-color: #2980b9;
-		}
-	</style>
+    <!-- Meta tags for character encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title -->
+    <title>Sokofreshh App</title>
+
+    <!-- Link to custom stylesheet -->
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+    <!-- Google Fonts link for Roboto font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Inline styles for layout and design -->
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+        }
+
+        /* Title styles */
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Paragraph styles */
+        p {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Content area styles */
+        .content {
+            padding: 20px;
+        }
+
+        /* API links styles */
+        .api-links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .api-links a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Grid container styles */
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Product item styles */
+        .product-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: calc(33.333% - 20px);
+            max-width: 300px;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .product-item h3 {
+            margin-top: 0;
+        }
+
+        /* Filtering controls styles */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-select, .filter-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Header section -->
     <header>
-	<img src="../static/images/logo.png" alt="Sokofreshh App Logo" class="logo">
-	<h1>Welcome to Sokofreshh App</h1>
+        <!-- Logo image -->
+        <img src="../static/images/logo.png" alt="Sokofreshh App Logo" class="logo">
+        <!-- Page title -->
+        <h1>Welcome to Sokofreshh App</h1>
     </header>
+
+    <!-- Banner section -->
     <div class="banner">
-	<img src="../static/images/banner.jpg" alt="Agricultural Banner" class="banner-image">
+        <!-- Banner image -->
+        <img src="../static/images/banner.jpg" alt="Agricultural Banner" class="banner-image">
+    </div>
+
+    <!-- Content area -->
     <div class="content">
-	<p>Your one-stop solution for managing agricultural products!</p>
-	<div class="api-links">
-	    <button id="/farmers">View Farmers</button>
-	    <button id="/retailers">View Retailers</button>
-	    <button id="/products">View Products</button>
-	    <button id="/orders">View Orders</button>
-	    <button id="/transactions">View Transactions</button>
-	</div>
+        <!-- Introduction text -->
+        <p>Your one-stop solution for managing agricultural products!</p>
 
-	<!-- Grid container -->
-	<div id="content" class="grid-container">
-		<!-- Product items will be dynamically added here -->
-	</div>
+        <!-- API links buttons -->
+        <div class="api-links">
+            <button id="/farmers">View Farmers</button>
+            <button id="/retailers">View Retailers</button>
+            <button id="/products">View Products</button>
+            <button id="/orders">View Orders</button>
+            <button id="/transactions">View Transactions</button>
+        </div>
 
-	<!-- Filtering controls -->
-	<div class="filter-container">
-		<select id="category-filter" class="filter-select">
-			<option value="">All Categories</option>
-			<option value="vegetables">Vegetables</option>
-			<option value="fruits">Fruits</option>
-			<!-- Add more options as needed -->
-		</select>
-		<input type="text" id="search-input" placeholder="Search products..." class="filter-input">
-	</div>
+        <!-- Grid container for product items -->
+        <div id="content" class="grid-container">
+            <!-- Product items will be dynamically added here -->
+        </div>
 
-	<!-- Pagination controls -->
-	<div class="pagination">
-		<button id="prev-page">&lt;</button>
-		<span id="current-page">1</span>/<span id="total-pages"></span>
-		<button id="next-page">&gt;</button>
-	</div>
+        <!-- Filtering controls -->
+        <div class="filter-container">
+            <select id="category-filter" class="filter-select">
+                <option value="">All</option>
+                <!-- Add filter options here -->
+            </select>
+        </div>
 
-	<footer>
-		<p>&copy; 2024 Sokofreshh App. All rights reserved.</p>
-	</footer>
-
-	<script src="../static/js/script.js"></script>
-  <script src="../static/Products.js"></script>
+        <!-- Pagination controls -->
+        <div class="pagination">
+            <!-- Add pagination buttons here -->
+        </div>
+    </div>
 </body>
 </html>
 
