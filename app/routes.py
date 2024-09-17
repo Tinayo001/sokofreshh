@@ -1,18 +1,24 @@
 #!/usr/bin/python3
+"""
+This module defines and registers API routes for managing farmers, retailers,
+products, orders and transactions in a Flask web application. It includes
+CRUD operations for each model and uses Flask-CORS for requests.
+"""
 
+# Import necessary libraries and models
 from flask_cors import CORS
 from flask import Blueprint, request, jsonify, render_template
 from app.models import Farmer, Retailer, Product, Order, Transaction, db
 
-# Blueprint
+# Blueprint to define routes for the API
 routes = Blueprint('routes', __name__)
 
-# Home route
+# Home route to render the main page
 @routes.route('/', strict_slashes=False)
 def home():
     return render_template('index.html')
 
-# Routes for Farmers
+# Endpoint to create a farmer
 @routes.route('/farmers', methods=['POST'])
 def create_farmer():
     data = request.get_json()
@@ -21,11 +27,13 @@ def create_farmer():
     db.session.commit()
     return jsonify({'message': 'Farmer created', 'farmer': farmer.id}), 201
 
+# Endpoint to fetch all farmers
 @routes.route('/farmers', methods=['GET'])
 def get_farmers():
     farmers = Farmer.query.all()
     return jsonify([farmer.as_dict() for farmer in farmers]), 200
 
+# Endpoint to update a farmer by ID
 @routes.route('/farmers/<int:id>', methods=['PUT'])
 def update_farmer(id):
     farmer = Farmer.query.get_or_404(id)
@@ -35,6 +43,7 @@ def update_farmer(id):
     db.session.commit()
     return jsonify({'message': 'Farmer updated'}), 200
 
+# Endpoint to delete a farmer by ID
 @routes.route('/farmers/<int:id>', methods=['DELETE'])
 def delete_farmer(id):
     farmer = Farmer.query.get_or_404(id)
@@ -42,7 +51,7 @@ def delete_farmer(id):
     db.session.commit()
     return jsonify({'message': 'Farmer deleted'}), 200
 
-# Routes for Retailers
+# Endpoint to create a retailer
 @routes.route('/retailers', methods=['POST'])
 def create_retailer():
     data = request.get_json()
@@ -51,12 +60,13 @@ def create_retailer():
     db.session.commit()
     return jsonify({'message': 'Retailer created', 'retailer': retailer.id}), 201
 
+# Endpoint to fetch the retailers
 @routes.route('/retailers', methods=['GET'])
 def get_retailers():
     retailers = Retailer.query.all()
     return jsonify([retailer.as_dict() for retailer in retailers]), 200
 
-# Routes for Products
+# Endpoint to create a products
 @routes.route('/products', methods=['POST'])
 def create_product():
     data = request.get_json()
@@ -65,6 +75,7 @@ def create_product():
     db.session.commit()
     return jsonify({'message': 'Product created', 'product': product.id}), 201
 
+# Endpoint to fetch the products
 @routes.route('/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
